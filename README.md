@@ -1,2 +1,2 @@
 # DjangoLia
-###My exploration of Django
+### My exploration of Django
