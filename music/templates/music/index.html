@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Django Bango</title>
+</head>
+<body>
+	{% if all_albums %}
+	<ul>
+		{% for album in all_albums %}
+			<li><a href="/music/{{ album.id }}/">{{ album.album_title }}</a></li>
+		{% endfor %}
+	</ul>
+	{% else %}
+		<h2>Nope! nothing found!</h2>
+	{% endif %}
+</body>
+</html>
