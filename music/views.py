@@ -1,19 +1,25 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.http import HttpResponse
-from django.template import loader
+from django.shortcuts import render
+from django.http import Http404
 from .models import Album
 
 
 def index(request):
     all_albums = Album.objects.all()
-    template = loader.get_template('music/index.html')
+    # template = loader.get_template('music/indexx.html')
     context = {
         'all_albums': all_albums
     }
 
-    return HttpResponse(template.render(context, request))
+    return render (request, 'music/index.html', context)
+    # return HttpResponse(template.render(context, request))
 
 
 def details(request, album_id):
-    return HttpResponse('Hello there your album id is ' + album_id)
+	try:
+		album = Album.objects.get(pk=album_id)
+	except Album.DoesNotExist:
+		raise Http404("Album Nahi Mila Bhai!")
+	return render(request, 'music/details.html', {'album': album})
